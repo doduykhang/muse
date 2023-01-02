@@ -1,0 +1,9 @@
+{
+	"DB_HOST": "127.0.0.1",
+	"DB_PORT": "3306",
+	"DB_USERNAME": "khang",
+	"DB_PASSWORD": "bao123",
+	"DATABASE_NAME": "muse",
+	"REDIS_HOST": "localhost",
+	"REDIS_PORT": "6379"
+}
