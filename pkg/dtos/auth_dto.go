@@ -25,7 +25,7 @@ type LoginRequest struct {
 
 
 type UserDTO struct {
-	ID string
+	ID uint
 	userInfo
 	Role string
 }

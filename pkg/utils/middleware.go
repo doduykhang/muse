@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/doduykhang/muse/pkg/constants"
 	"github.com/doduykhang/muse/pkg/dtos"
 )
 
@@ -46,6 +47,7 @@ func Authorized(roles ...string) MiddleWare {
 			}
 
 			value, err := componentService.CacheService.Get(tokenCookie.Value)
+
 			if err != nil {
 				ErrorResponse(&w, "who are you :<", 401)
 				return
@@ -63,7 +65,7 @@ func Authorized(roles ...string) MiddleWare {
 			}
 
 
-			ctx := context.WithValue(r.Context(), "userId", userDTO.ID)
+			ctx := context.WithValue(r.Context(), constants.ID_DTO, userDTO.ID)
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}

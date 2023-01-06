@@ -31,3 +31,23 @@ type SelectSongDTO struct {
 	Artists []ArtistDTO `json:"aritsts" gorm:"serializer:json"`
 	Albums []AlbumDTO `json:"albums" gorm:"serializer:json"`
 }
+
+type SongsOfAlbumsResponse struct {
+	ID uint `json:"id"`
+	Title string `json:"title"`
+	Duration int `json:"duration"`
+	ReleaseDate time.Time `json:"releaseDate"`
+	Image       string `json:"image"`
+	Audio string `json:"audio"`
+	Artists []ArtistDTO `json:"aritsts" gorm:"serializer:json"`
+}
+
+type SongsOfArtistResponse struct {
+	ID uint `json:"id"`
+	Title string `json:"title"`
+	Duration int `json:"duration"`
+	ReleaseDate time.Time `json:"releaseDate"`
+	Image       string `json:"image"`
+	Audio string `json:"audio"`
+	Albums []AlbumDTO `json:"albums" gorm:"serializer:json"`
+}

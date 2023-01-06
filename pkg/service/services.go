@@ -3,6 +3,7 @@ package service
 type BusinessService struct {
 	SongService SongService
 	AuthService AuthService
+	PlaylistService PlaylistService
 }
 
 type ComponentService struct {
@@ -16,6 +17,7 @@ var (
 	businessService = &BusinessService{
 		SongService: NewSongService(),
 		AuthService: NewAuthService(),
+		PlaylistService: NewPlayListService(),
 	}
 
 	componentService = &ComponentService{

@@ -26,7 +26,6 @@ func authRoute(r chi.Router) {
 		http.MethodPost, 
 		constants.LOGIN_ENDPOINT, 
 		controllers.LoginController,
-		utils.Authorized(constants.USER_ROLE),
 	)
 
 	r.With(utils.Authorized(constants.USER_ROLE)).Get("/user", func (w http.ResponseWriter, r *http.Request){

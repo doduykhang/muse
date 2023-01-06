@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/doduykhang/muse/pkg/constants"
 	"github.com/doduykhang/muse/pkg/dtos"
@@ -71,6 +72,7 @@ func (service *authService) Login(request *LoginRequest) (*UserDTO, error) {
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("request", request)
 
 	ok := service.passwordService.Compare(request.Password, account.Password)
 	if !ok {
