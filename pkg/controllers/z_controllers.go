@@ -1,7 +1,9 @@
 package controllers
 
 type Controllers struct {
-	PlaylistController playlistController 
+	PlaylistController *playlistController 
+	SongController *SongController
+	AlbumController *AlbumController
 }
 
 var (
@@ -11,6 +13,8 @@ var (
 func init() {
 	appControllers = &Controllers{
 		PlaylistController: NewPlaylistController(),
+		SongController: GetSongController(),	
+		AlbumController: NewAlbumController(),
 	}	
 }
 

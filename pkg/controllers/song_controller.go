@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/doduykhang/muse/pkg/constants"
 	"github.com/doduykhang/muse/pkg/dtos"
 	"github.com/doduykhang/muse/pkg/lib"
 	"github.com/doduykhang/muse/pkg/service"
@@ -22,12 +23,29 @@ type SongController struct {
 	CreateUploadController[dtos.CreateSong, dtos.SongDTO]
 	UpdateController[dtos.UpdateSong, dtos.SongDTO, dtos.BaseID]
 	DeleteController[dtos.BaseID]
-	ReadController[dtos.SongDTO, dtos.BaseID]
+	ReadController[dtos.SongDTO, dtos.BaseID]	
 }
 
 func (controller *SongController) SelectSongs(request *dtos.Paginate) (*[]dtos.SelectSongDTO, error) {
 	dtos, err := controller.service.SelectSongs(request)
 	return dtos, err
+}
+
+func (controller *SongController) SelectNewSongs(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	paginate, ok := ctx.Value(constants.PAGINATE_DTO).(*dtos.Paginate) 	
+	if !ok {
+		utils.ErrorResponse(&w, constants.ERROR_GETTING_REQUEST, http.StatusInternalServerError)
+		return
+	}
+
+	response, err := controller.service.SelectNewSongs(paginate)
+	if err != nil {
+		utils.ErrorResponse(&w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	utils.JsonResponse(&w, response)
 }
 
 func init() {
@@ -36,6 +54,10 @@ func init() {
 	songController.UpdateController.service = songService
 	songController.DeleteController.service = songService
 	songController.ReadController.service = songService
+}
+
+func GetSongController() *SongController {
+	return songController	
 }
 
 func Test(r *chi.Mux) {
@@ -70,3 +92,5 @@ func Test(r *chi.Mux) {
 		utils.JsonResponse(&w, value)
 	})
 }
+
+

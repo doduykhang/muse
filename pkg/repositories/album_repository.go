@@ -9,7 +9,7 @@ type AlbumRepository interface {
 	CrudRepository[*models.Album, uint]
 	GetAlbumsOfArtist(artistId int) (*[]dtos.AlbumOfArtistResponse, error)
 	SearchAlbums(paginate dtos.Paginate, keyword string) (*[]dtos.SeachAlbumResponse, error)
-	SelectNewAlbum(paginate dtos.Paginate) (*[]dtos.SelectNewAlbumReponse, error) 
+	SelectNewAlbum(paginate dtos.Paginate) ([]dtos.SelectNewAlbumReponse, error) 
 }
 
 type albumRepository struct {
@@ -34,13 +34,13 @@ func (repositoy *albumRepository) SearchAlbums(paginate dtos.Paginate, keyword s
 	return &dtos, nil
 }
 
-func (repositoy *albumRepository) SelectNewAlbum(paginate dtos.Paginate) (*[]dtos.SelectNewAlbumReponse, error) {
+func (repositoy *albumRepository) SelectNewAlbum(paginate dtos.Paginate) ([]dtos.SelectNewAlbumReponse, error) {
 	var dtos []dtos.SelectNewAlbumReponse
-	result := db.Raw("call select_new_albums(?, ?, ?)", paginate.Size, paginate.Page).Scan(&dtos);
+	result := db.Raw("call select_new_albums(?, ?)", paginate.Size, paginate.Page).Scan(&dtos);
 	if result.Error != nil {
 		return nil, result.Error
 	}
-	return &dtos, nil
+	return dtos, nil
 }
 
 func NewAlbumRepository() AlbumRepository {

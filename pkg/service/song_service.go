@@ -26,6 +26,7 @@ type SongService interface {
 	DeleteService[BaseSongID]
 	ReadService[SongDTO, BaseSongID]
 	SelectSongs(*dtos.Paginate) (*[]dtos.SelectSongDTO, error)
+	SelectNewSongs(request *dtos.Paginate) (*[]dtos.SelectSongDTO, error)
 }
 
 type songService struct {
@@ -39,6 +40,10 @@ type songService struct {
 
 func (service *songService) SelectSongs(request *dtos.Paginate) (*[]dtos.SelectSongDTO, error) {
 	return service.repository.SelectSongs(request)
+}
+
+func (service *songService) SelectNewSongs(request *dtos.Paginate) (*[]dtos.SelectSongDTO, error) {
+	return service.repository.SelectNewSong(*request)
 }
 
 func NewSongService() SongService {

@@ -29,5 +29,5 @@ type SelectNewAlbumReponse struct {
 	ReleaseDate time.Time `json:"releaseDate"`
 	Image string `json:"image"`
 	AlbumType string `json:"albumType"`
-	Artists []ArtistDTO `json:"artists"`
+	Artists []ArtistDTO `json:"artists" gorm:"serializer:json"`
 }

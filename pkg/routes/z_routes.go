@@ -11,5 +11,6 @@ func Route(r chi.Router) {
 		r.Route(constants.AUTH_ENDPOINT, authRoute)
 		r.Route("/song", songRoute)
 		r.Route("/playlist", playlistRoute)
+		r.Route("/album", albumRoute)
 	})
 }

@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/doduykhang/muse/pkg/constants"
@@ -22,8 +21,6 @@ func (controller *playlistController) GetUserPlaylists(w http.ResponseWriter, r 
 		return
 	}
 
-	fmt.Println("got paginate")
-
 	userId, ok := ctx.Value(constants.ID_DTO).(uint) 	
 
 	if !ok {
@@ -39,8 +36,8 @@ func (controller *playlistController) GetUserPlaylists(w http.ResponseWriter, r 
 	utils.JsonResponse(&w, result)
 }
 
-func NewPlaylistController() playlistController {
-	return playlistController{
+func NewPlaylistController() *playlistController {
+	return &playlistController{
 		playlistService: businessServices.PlaylistService,
 	}	
 }

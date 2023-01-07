@@ -67,7 +67,7 @@ func (repositoy *songRepository) SearchSongs(paginate dtos.Paginate, keyword str
 
 func (repositoy *songRepository) SelectNewSong(paginate dtos.Paginate) (*[]dtos.SelectSongDTO, error) {
 	var dtos []dtos.SelectSongDTO
-	result := db.Raw("call select_new_songs(?, ?, ?)", paginate.Size, paginate.Page).Scan(&dtos);
+	result := db.Raw("call select_new_songs(?, ?)", paginate.Size, paginate.Page).Scan(&dtos);
 	if result.Error != nil {
 		return nil, result.Error
 	}
