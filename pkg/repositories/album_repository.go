@@ -6,14 +6,14 @@ import (
 )
 
 type AlbumRepository interface {
-	CrudRepository[*models.Album, uint]
+	CrudRepository[models.Album, models.BaseID]
 	GetAlbumsOfArtist(artistId int) (*[]dtos.AlbumOfArtistResponse, error)
 	SearchAlbums(paginate dtos.Paginate, keyword string) (*[]dtos.SeachAlbumResponse, error)
 	SelectNewAlbum(paginate dtos.Paginate) ([]dtos.SelectNewAlbumReponse, error) 
 }
 
 type albumRepository struct {
-	CrudRepositoryImpl[*models.Album, uint]
+	CrudRepositoryImpl[models.Album, models.BaseID]
 }
 
 func (repositoy *albumRepository) GetAlbumsOfArtist(artistId int) (*[]dtos.AlbumOfArtistResponse, error) {

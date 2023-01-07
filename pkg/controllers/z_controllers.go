@@ -4,6 +4,7 @@ type Controllers struct {
 	PlaylistController *playlistController 
 	SongController *SongController
 	AlbumController *AlbumController
+	GenreController *genreController	
 }
 
 var (
@@ -15,6 +16,7 @@ func init() {
 		PlaylistController: NewPlaylistController(),
 		SongController: GetSongController(),	
 		AlbumController: NewAlbumController(),
+		GenreController: NewGenreController(),
 	}	
 }
 

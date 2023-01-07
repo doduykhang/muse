@@ -27,7 +27,12 @@ type SongService interface {
 	ReadService[SongDTO, BaseSongID]
 	SelectSongs(*dtos.Paginate) (*[]dtos.SelectSongDTO, error)
 	SelectNewSongs(request *dtos.Paginate) (*[]dtos.SelectSongDTO, error)
-}
+	SelectSongOfGenre(request *dtos.Paginate, genreId uint) (*[]dtos.SelectSongDTO, error)
+	SearchSongs(request *dtos.Paginate, keyword string) (*[]dtos.SelectSongDTO, error)
+	GetSongOfArtist(artistId int) (*[]dtos.SongsOfArtistResponse, error) 
+	GetSongOfAlbum(albumId int) (*[]dtos.SongsOfAlbumsResponse, error) 
+	GetSongOfPlaylist(playlistId int) (*[]dtos.SelectSongDTO, error) 
+ }
 
 type songService struct {
 	repository repositories.SongRepository
@@ -44,6 +49,26 @@ func (service *songService) SelectSongs(request *dtos.Paginate) (*[]dtos.SelectS
 
 func (service *songService) SelectNewSongs(request *dtos.Paginate) (*[]dtos.SelectSongDTO, error) {
 	return service.repository.SelectNewSong(*request)
+}
+
+func (service *songService) SelectSongOfGenre(request *dtos.Paginate, genreId uint) (*[]dtos.SelectSongDTO, error) {
+	return service.repository.SelectSongsOfGenre(*request, genreId)
+}
+
+func (service *songService) SearchSongs(request *dtos.Paginate, keyword string) (*[]dtos.SelectSongDTO, error) {
+	return service.repository.SearchSongs(*request, keyword)
+}
+
+func (service *songService) GetSongOfArtist(artistId int) (*[]dtos.SongsOfArtistResponse, error) {
+	return service.repository.GetSongsOfArtist(artistId)
+}
+
+func (service *songService) GetSongOfAlbum(albumId int) (*[]dtos.SongsOfAlbumsResponse, error) {
+	return service.repository.GetSongsOfAlbums(albumId)
+}
+
+func (service *songService) GetSongOfPlaylist(playlistId int) (*[]dtos.SelectSongDTO, error) {
+	return service.repository.GetSongsOfPlaylist(playlistId)
 }
 
 func NewSongService() SongService {

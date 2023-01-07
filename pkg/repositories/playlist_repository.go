@@ -6,12 +6,12 @@ import (
 )
 
 type PlaylitsRepository interface {
-	CrudRepository[*models.Playlist, uint]
+	CrudRepository[models.Playlist, models.BaseID]
 	GetMyPlaylist(paginate dtos.Paginate, userId uint) ([]dtos.PlaylistDTO, error)
 }
 
 type playlistRepository struct {
-	CrudRepositoryImpl[*models.Playlist, uint]
+	CrudRepositoryImpl[models.Playlist, models.BaseID]
 }
 
 func (repositoy *playlistRepository) GetMyPlaylist(paginate dtos.Paginate, userId uint) ([]dtos.PlaylistDTO, error) {

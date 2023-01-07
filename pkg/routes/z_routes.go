@@ -12,5 +12,6 @@ func Route(r chi.Router) {
 		r.Route("/song", songRoute)
 		r.Route("/playlist", playlistRoute)
 		r.Route("/album", albumRoute)
+		r.Route("/genre", genreRoute)
 	})
 }

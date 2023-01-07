@@ -6,12 +6,12 @@ import (
 )
 
 type ArtistRepository interface {
-	CrudRepository[*models.Aritst, uint]
+	CrudRepository[models.Aritst, models.BaseID]
 	SearchArtist(paginate dtos.Paginate, keyword string) (*[]dtos.SeachArtistsResponse, error)
 }
 
 type aritstRepository struct {
-	CrudRepositoryImpl[*models.Aritst, uint]
+	CrudRepositoryImpl[models.Aritst, models.BaseID]
 }
 
 func (repositoy *aritstRepository) SearchArtist(paginate dtos.Paginate, keyword string) (*[]dtos.SeachArtistsResponse, error) {

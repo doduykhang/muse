@@ -5,6 +5,7 @@ type BusinessService struct {
 	AuthService AuthService
 	PlaylistService PlaylistService
 	AlbumService AlbumService
+	GenreService GenreService
 }
 
 type ComponentService struct {
@@ -20,6 +21,7 @@ var (
 		AuthService: NewAuthService(),
 		PlaylistService: NewPlayListService(),
 		AlbumService: NewAlbumService(),
+		GenreService: NewGenreService(),
 	}
 
 	componentService = &ComponentService{
